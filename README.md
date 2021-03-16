@@ -9,4 +9,4 @@ A command line tool to find running routes matching the shape of letters or emoj
 Builds a neural network model to identify the specified character / emoji. See --help for additional options.
 
 # search.py [--city = "Seattle, WA, USA"]
-Uses the neural network model to identify closed paths that. Supply a city in quotes. See --help for additional options.
+Uses a trained neural network model (created with build.py) to track down shapes in your target geographic area. Supply a city in quotes. See --help for additional options.
