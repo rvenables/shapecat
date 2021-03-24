@@ -43,11 +43,11 @@ gpu = tf.config.experimental.list_physical_devices('GPU')
 if gpu and len(gpu) > 0:
     tf.config.experimental.set_memory_growth(gpu[0], True)
 
-parser = argparse.ArgumentParser(description='Heart Search Model Build Tool')
+parser = argparse.ArgumentParser(description='[shapecat] Model Build Tool')
 parser.add_argument("--character", default="♥", required=False, help="character/emoji for model construction")
 parser.add_argument("--save", default=False, required=False, help="save copies of training images")
 parser.add_argument("--savedir", default='./train', required=False, help="training image storage location (only relevant if save=true)")
-parser.add_argument("--size", default=100, type=int, required=False, help="the number of positive and negative examples (each)")
+parser.add_argument("--size", default=10000, type=int, required=False, help="the number of positive and negative examples (each)")
 parser.add_argument("--model", default="model.h5", required=False, help="the name of the output model")
 parser.add_argument("--city", default="Sarasota, FL, USA", required=False, help="the name of the city for negative training data")
 parser.add_argument("--dim", default=180, type=int, required=False, help="the width/height of the training images (larger=slower)")

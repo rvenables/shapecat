@@ -45,21 +45,22 @@ gpu = tf.config.experimental.list_physical_devices('GPU')
 if gpu and len(gpu) > 0:
     tf.config.experimental.set_memory_growth(gpu[0], True)
 
-parser = argparse.ArgumentParser(description='Heart Search Model Build Tool')
-parser.add_argument("--threshold", default=0.5, type=float, required=False, help="threshold for matching images")
+parser = argparse.ArgumentParser(description='[shapecat] Search Tool')
+parser.add_argument("city", nargs=1, help="the name of the location to search in")
+parser.add_argument("--threshold", default=0.5, type=float, required=False, help="threshold for matching images (0-1)")
 parser.add_argument("--model", default="model.h5", required=False, help="the name of the input model")
-parser.add_argument("--city", default="St Petersburg, FL, USA", required=False, help="the name of the location to search in")
 parser.add_argument("--result_csv", default="matches.csv", required=False, help="the name of the results file to store matches")
 parser.add_argument("--result_dir", default="matches", required=False, help="the name of the results directory to store matches")
 parser.add_argument("--smin", default=4, type=int, required=False, help="the minimum number of segments to match")
 parser.add_argument("--smax", default=10, type=int, required=False, help="the maximum number of segments to match")
-parser.add_argument("--dmin", default=750, type=int, required=False, help="the minimum distance to match, in meters")
-parser.add_argument("--dmax", default=1000, type=int, required=False, help="the maximum distance to match, in meters")
+parser.add_argument("--dmin", default=500, type=int, required=False, help="the minimum distance to match, in meters")
+parser.add_argument("--dmax", default=10000, type=int, required=False, help="the maximum distance to match, in meters")
 parser.add_argument("--visualize", default=True, type=bool, required=False, help="controls image saving to [result_dir] directory")
 args = parser.parse_args()
 
 if not os.path.isfile(args.model):
     print(f'Unable to find model file ({args.model}). Try running build.py first.')
+    exit()
 
 model = tf.keras.models.load_model(args.model)
 
